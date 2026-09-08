@@ -21,7 +21,7 @@ resource "azurerm_storage_account" "abhistordemo" {
 #Now we creating container
 resource "azurerm_storage_container" "abhishekcontainerdemo" {
   name                  = "containerdemo001"
-  storage_account_id    = azurerm_storage_account.abhistordemo
+  storage_account_id    = azurerm_storage_account.abhistordemo.id
   container_access_type = "private"
 }
 
@@ -48,16 +48,17 @@ resource "azurerm_network_security_group" "abhinsg001" {
   location            = azurerm_resource_group.abhishekdemo.location
 
   security_rule {
-    name                       = AllowRDP
+    name                       = "AllowRDP"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
 
 }
 
